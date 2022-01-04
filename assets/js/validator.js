@@ -50,6 +50,7 @@ function Validator(options) {
       });
 
       if (isFormValid) {
+        // Truong hop submit vs onSubmit la method cua Validator
         if (typeof options.onSubmit === "function") {
           var enableInputs = formElement.querySelectorAll("[name]");
           var formValues = Array.from(enableInputs).reduce(
@@ -58,6 +59,9 @@ function Validator(options) {
           );
           options.onSubmit(formValues);
         }
+      } else {
+        // submit voi hanh vi mac dinh, html
+        formElement.submit();
       }
     };
 
