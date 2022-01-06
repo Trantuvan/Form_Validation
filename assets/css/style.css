@@ -116,6 +116,7 @@ html {
   font-size: 1.4rem;
 }
 
-.form-group .options input[type="radio"] {
+.form-group .options input[type="radio"],
+.form-group .options input[type="checkbox"] {
   margin-right: 8px;
 }
