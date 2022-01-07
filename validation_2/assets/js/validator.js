@@ -38,6 +38,7 @@ function Validator(formSelector, options = {}) {
       };
     },
   };
+
   // Lay ra formElement trong DOM theo `formSelector`
   let formElement = document.querySelector(formSelector);
 
@@ -92,7 +93,7 @@ function Validator(formSelector, options = {}) {
         }
       }
     }
-    return !errorMessage;
+    return Boolean(errorMessage);
   }
 
   function handleClearError(evt) {
