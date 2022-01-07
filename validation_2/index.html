@@ -60,8 +60,8 @@
     <script src="./assets/js/validator.js"></script>
     <script>
       Validator("#register-form", {
-        onSubmit: function () {
-          console.log("Call API");
+        onSubmit: function (data) {
+          console.log(data);
         },
       });
     </script>

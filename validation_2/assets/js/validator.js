@@ -122,9 +122,38 @@ function Validator(formSelector, options = {}) {
 
     if (isValid) {
       if (typeof options.onSubmit === "function") {
-        return options.onSubmit();
+        let formValues = Array.from(inputs).reduce((values, input) => {
+          switch (input.type) {
+            case "radio":
+              values[input.name] = formElement.querySelector(
+                'input[name="' + input.name + '"]:checked'
+              ).value;
+              break;
+
+            case "checkbox":
+              if (!Array.isArray(values[input.name])) {
+                values[input.name] = [];
+              }
+              if (!input.matches(":checked")) {
+                return values;
+              }
+              values[input.name].push(input.value);
+              break;
+
+            case "file":
+              values[input.name] = input.files;
+              break;
+
+            default:
+              values[input.name] = input.value;
+              break;
+          }
+          return values;
+        }, {});
+        options.onSubmit(formValues);
+      } else {
+        formElement.onsubmit();
       }
-      formElement.onsubmit();
     }
   };
 }
