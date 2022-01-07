@@ -1,4 +1,6 @@
-function Validator(formSelector, options = {}) {
+function Validator(formSelector) {
+  // _this dai dien cho new instance of Validator
+  let _this = this;
   let formRules = {};
 
   function getParent(element, selector) {
@@ -77,10 +79,10 @@ function Validator(formSelector, options = {}) {
     let rules = formRules[evt.target.name];
     let errorMessage;
 
-    rules.find((ruleFunc) => {
+    for (let ruleFunc of rules) {
       errorMessage = ruleFunc(evt.target.value);
-      return errorMessage;
-    });
+      if (errorMessage) break;
+    }
 
     if (errorMessage) {
       let formGroup = getParent(evt.target, ".form-group");
@@ -110,7 +112,9 @@ function Validator(formSelector, options = {}) {
 
   //   Xu ly hanh vi submit form
   formElement.onsubmit = function (evt) {
+    // this trong func nay chinh la form nao goi evt submit
     evt.preventDefault();
+
     let inputs = formElement.querySelectorAll("[name][rules]");
     let isValid = true;
 
@@ -121,7 +125,7 @@ function Validator(formSelector, options = {}) {
     });
 
     if (isValid) {
-      if (typeof options.onSubmit === "function") {
+      if (typeof _this.onSubmit === "function") {
         let formValues = Array.from(inputs).reduce((values, input) => {
           switch (input.type) {
             case "radio":
@@ -150,7 +154,7 @@ function Validator(formSelector, options = {}) {
           }
           return values;
         }, {});
-        options.onSubmit(formValues);
+        _this.onSubmit(formValues);
       } else {
         formElement.onsubmit();
       }
