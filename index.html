@@ -159,18 +159,18 @@
         formGroupSelector: ".form-group",
         errorSelector: ".form-message",
         rules: [
-          // Validator.isRequired("#fullname", "Vui lòng nhập tên đầy đủ"),
-          // Validator.isRequired("#email"),
-          // Validator.isEmail("#email"),
-          // Validator.minLength("#password", 6),
-          // Validator.isRequired("#password_confirmation"),
-          // Validator.isConfirmed(
-          //   "#password_confirmation",
-          //   () => document.querySelector("#form-1 #password").value,
-          //   "Mật khẩu nhập lại không chính xác"
-          // ),
+          Validator.isRequired("#fullname", "Vui lòng nhập tên đầy đủ"),
+          Validator.isRequired("#email"),
+          Validator.isEmail("#email"),
+          Validator.minLength("#password", 6),
+          Validator.isRequired("#password_confirmation"),
+          Validator.isConfirmed(
+            "#password_confirmation",
+            () => document.querySelector("#form-1 #password").value,
+            "Mật khẩu nhập lại không chính xác"
+          ),
           Validator.isRequired("#province"),
-          // Validator.isRequired("input[name='gender']"),
+          Validator.isRequired("input[name='gender']"),
           Validator.isRequired("#avatar"),
         ],
         onSubmit: function (data) {
